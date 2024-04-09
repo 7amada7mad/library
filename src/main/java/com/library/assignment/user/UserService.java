@@ -28,7 +28,7 @@ public class UserService {
 
 
 
-    public ResponseEntity<Iterable<User>> getAllUsers() {
+    public ResponseEntity<List<User>> getAllUsers() {
         Optional<List<User>> userListOptional = Optional.of(userRepo.findAll());
         if (userListOptional.isPresent()){
             return ResponseEntity.ok(userListOptional.get());

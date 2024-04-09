@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 @NoArgsConstructor
 @AllArgsConstructor
-@RequestMapping("/api/v1/")Adde
+@RequestMapping("/api/v1/")
 public class UserController {
     UserService userService;
 
