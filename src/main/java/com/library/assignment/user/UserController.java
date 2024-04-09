@@ -10,9 +10,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.List;
 
 @RestController
-@NoArgsConstructor
 @AllArgsConstructor
-@RequestMapping("/api/v1/")
+@RequestMapping("api/v1/users")
 public class UserController {
     UserService userService;
 
@@ -20,9 +19,9 @@ public class UserController {
     private ResponseEntity<List<User>> getAllUsers(){
         return userService.getAllUsers();
     }
-    @GetMapping("${userId}")
-    private ResponseEntity<User> getUser(@PathVariable Long userId){
-        return userService.findUserById(userId);
+    @GetMapping("{id}")
+    private ResponseEntity<User> getUser(@PathVariable Long id){
+        return userService.findUserById(id);
     }
     @PostMapping
     private ResponseEntity<Void> addUser(@RequestBody User user, UriComponentsBuilder ucb) {
