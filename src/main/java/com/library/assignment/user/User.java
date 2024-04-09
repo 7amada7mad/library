@@ -29,5 +29,5 @@ public class User {
     private String email;
     @NotBlank
     @Column(nullable = false)
-    private int pinKod;
+    private int pinCode;
 }
