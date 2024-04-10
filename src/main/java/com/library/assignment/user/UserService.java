@@ -39,7 +39,7 @@ public class UserService {
     }
 
     public ResponseEntity<Void> addUser(@RequestBody User user, UriComponentsBuilder ucb) {
-
+    //Todo Något är fel här för att pinkoden sparas inte ordentligt.
         userRepo.save(user);
         URI locationOfNewUser = ucb
                 .path("api/v1/users/{id}")
@@ -74,7 +74,7 @@ public class UserService {
                         user.setLastName((String) value);
                         break;
                     case "pinCode":
-                        user.setPinCode((int) value);
+                        user.setPinCode((Long) value);
                         break;
                 }
             });

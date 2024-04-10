@@ -26,5 +26,5 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
     @Column(nullable = false)
-    private int pinCode;
+    private Long pinCode;
 }
