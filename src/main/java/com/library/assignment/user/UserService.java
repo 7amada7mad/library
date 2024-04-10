@@ -9,6 +9,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -45,5 +46,42 @@ public class UserService {
                 .buildAndExpand(user.getUserId())
                 .toUri();
         return ResponseEntity.created(locationOfNewUser).build();
+    }
+
+    public ResponseEntity<Void> deleteUser(Long id) {
+        Optional<User> optionalUserToDelete = userRepo.findById(id);
+        if (optionalUserToDelete.isPresent()){
+            userRepo.delete(optionalUserToDelete.get());
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    public ResponseEntity<User> updateUser(Long userId, Map<String, Object> updates) {
+        Optional<User> optionalUserToUpdate = userRepo.findById(userId);
+        if (optionalUserToUpdate.isPresent()){
+            User user = optionalUserToUpdate.get();
+            updates.forEach((key, value) -> {
+                switch (key) {
+                    case "email":
+                        user.setEmail((String) value);
+                        break;
+                    case "firstName":
+                        user.setFirstName((String) value);
+                        break;
+                    case "lastName":
+                        user.setLastName((String) value);
+                        break;
+                    case "pinCode":
+                        user.setPinCode((int) value);
+                        break;
+                }
+            });
+
+        return ResponseEntity.ok(user);
+    }else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

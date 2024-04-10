@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @AllArgsConstructor
@@ -19,15 +20,24 @@ public class UserController {
     private ResponseEntity<List<User>> getAllUsers(){
         return userService.getAllUsers();
     }
-    @GetMapping("{id}")
-    private ResponseEntity<User> getUser(@PathVariable Long id){
+    @GetMapping("{userId}")
+    private ResponseEntity<User> getUser(@PathVariable Long userId){
 
-        return userService.findUserById(id);
+        return userService.findUserById(userId);
     }
     @PostMapping
     private ResponseEntity<Void> addUser(@RequestBody User user, UriComponentsBuilder ucb) {
 
         return userService.addUser(user, ucb);
+    }
+    @DeleteMapping("{userId}")
+    private  ResponseEntity<Void> deleteUser(@PathVariable Long userId){
+        return userService.deleteUser(userId);
+    }
+
+    @PatchMapping("{userId}")
+    private ResponseEntity<User> updateUser(@PathVariable Long userId, @RequestBody Map<String, Object> updates){
+        return userService.updateUser(userId, updates);
     }
 
 
