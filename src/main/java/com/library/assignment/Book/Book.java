@@ -1,12 +1,15 @@
 package com.library.assignment.book;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.library.assignment.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Table
 @Entity
@@ -23,15 +26,19 @@ public class Book {
     private String title;
     @Column(nullable = false)
     private String author;
+
     @Column(nullable = false)
-    private LocalDate releaseDate;
+    @JsonFormat(pattern = "YYYY")
+    private Date releaseDate;
     @Column
     private boolean borrowed = false;
 
     @Column
     private LocalDate borrowedDate;
 
-    @Column
-    private Long loanerId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private User borrower;
+
 
 }
