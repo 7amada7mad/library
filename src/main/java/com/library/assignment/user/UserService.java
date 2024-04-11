@@ -61,24 +61,24 @@ public class UserService {
     public ResponseEntity<User> updateUser(Long userId, Map<String, Object> updates) {
         Optional<User> optionalUserToUpdate = userRepo.findById(userId);
         if (optionalUserToUpdate.isPresent()){
-            //User user = optionalUserToUpdate.get();
+            User user = optionalUserToUpdate.get();
             updates.forEach((key, value) -> {
                 switch (key) {
                     case "email":
-                        optionalUserToUpdate.get().setEmail((String) value);
+                        user.setEmail((String) value);
                         break;
                     case "firstName":
-                        optionalUserToUpdate.get().setFirstName((String) value);
+                        user.setFirstName((String) value);
                         break;
                     case "lastName":
-                        optionalUserToUpdate.get().setLastName((String) value);
+                        user.setLastName((String) value);
                         break;
                     case "pinCode":
-                        optionalUserToUpdate.get().setPinCode((String) value);
+                        user.setPinCode((String) value);
                         break;
                 }
             });
-        userRepo.save(optionalUserToUpdate.get());
+        userRepo.save(user);
         return ResponseEntity.ok(optionalUserToUpdate.get());
     }else {
             return ResponseEntity.notFound().build();
