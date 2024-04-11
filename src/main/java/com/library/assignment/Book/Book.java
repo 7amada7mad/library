@@ -1,4 +1,4 @@
-package com.library.assignment.Book;
+package com.library.assignment.book;
 
 
 import jakarta.persistence.*;

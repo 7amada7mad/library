@@ -1,4 +1,4 @@
-package com.library.assignment.Book;
+package com.library.assignment.book;
 
 import com.library.assignment.user.User;
 import com.library.assignment.user.UserService;

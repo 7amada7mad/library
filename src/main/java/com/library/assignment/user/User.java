@@ -27,4 +27,7 @@ public class User {
     private String email;
     @Column(nullable = false)
     private String pinCode;
+    @Enumerated
+    @Column(nullable = false)
+    private UserType userType = UserType.BORROWER;
 }
