@@ -79,7 +79,7 @@ public class UserService {
                 }
             });
         userRepo.save(user);
-        return ResponseEntity.ok(optionalUserToUpdate.get());
+        return ResponseEntity.ok(user);
     }else {
             return ResponseEntity.notFound().build();
         }
