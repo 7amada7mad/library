@@ -1,13 +1,17 @@
 package com.library.assignment.user;
 
 
+import com.library.assignment.book.Book;
+import com.library.assignment.book.BookRepo;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -16,6 +20,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class UserService {
     UserRepo userRepo;
+    BookRepo bookRepo;
 
 
     public ResponseEntity<User> findUserById(Long userId) {
@@ -81,6 +86,21 @@ public class UserService {
         userRepo.save(user);
         return ResponseEntity.ok(user);
     }else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    public ResponseEntity<List<Book>> getBooksByUser(Long userId) {
+        Optional<User> optionalUser = userRepo.findById(userId);
+        if (optionalUser.isPresent()){
+           List<Book> books = bookRepo.findByBorrowerId(userId);
+           if (books!=null){
+               return  ResponseEntity.ok(books);
+           } else {
+               return ResponseEntity.noContent().build();
+           }
+
+        } else {
             return ResponseEntity.notFound().build();
         }
     }

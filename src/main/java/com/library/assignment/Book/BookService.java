@@ -1,12 +1,14 @@
 package com.library.assignment.book;
 
 import com.library.assignment.user.User;
+import com.library.assignment.user.UserRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,6 +17,7 @@ import java.util.Optional;
 public class BookService {
 
     BookRepo bookRepo;
+    UserRepo userRepo;
     public ResponseEntity<List<Book>> getAllBooks() {
         Optional<List<Book>> bookListOptional = Optional.of(bookRepo.findAll());
         if (bookListOptional.isPresent()){
@@ -41,6 +44,36 @@ public class BookService {
                 .buildAndExpand(book.getBookId())
                 .toUri();
         return ResponseEntity.created(locationOfNewUser).build();
+    }
+
+    public ResponseEntity<Boolean> borrowBook(Long bookId, Long userId) {
+        Optional<Book> optionalBookToBorrow = bookRepo.findById(bookId);
+        Optional<User> optionalUser = userRepo.findById(userId);
+        if (optionalUser.isPresent() && optionalBookToBorrow.isPresent() && !optionalBookToBorrow.get().isBorrowed()){
+            Book book = optionalBookToBorrow.get();
+            book.setBorrowed(true);
+            book.setBorrowerId(userId);
+            book.setBorrowedDate(LocalDate.now());
+            bookRepo.save(book);
+            return ResponseEntity.ok().build();
+        }else {
+            return ResponseEntity.noContent().build();
+        }
+    }
+
+    public ResponseEntity<Boolean> returnBook(Long bookId, Long userId) {
+        Optional<Book> optionalBookToBorrow = bookRepo.findById(bookId);
+        Optional<User> optionalUser = userRepo.findById(userId);
+        if (optionalUser.isPresent() && optionalBookToBorrow.isPresent() && optionalBookToBorrow.get().getBorrowerId().equals(userId)){
+            Book book = optionalBookToBorrow.get();
+            book.setBorrowed(false);
+            book.setBorrowerId(null);
+            book.setBorrowedDate(null);
+            bookRepo.save(book);
+            return ResponseEntity.ok().build();
+        }else {
+            return ResponseEntity.noContent().build();
+        }
     }
 }
 

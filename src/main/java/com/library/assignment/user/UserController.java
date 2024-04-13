@@ -1,6 +1,7 @@
 package com.library.assignment.user;
 
 
+import com.library.assignment.book.Book;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +39,10 @@ public class UserController {
     @PatchMapping("{userId}")
     private ResponseEntity<User> updateUser(@PathVariable Long userId, @RequestBody Map<String, Object> updates){
         return userService.updateUser(userId, updates);
+    }
+    @GetMapping("{userId}/books")
+    private ResponseEntity<List<Book>> getBooksByUser(@PathVariable Long userId){
+        return userService.getBooksByUser(userId);
     }
 
 
