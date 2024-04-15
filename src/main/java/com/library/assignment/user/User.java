@@ -31,7 +31,7 @@ public class User {
     @Column(nullable = false)
     private String pinCode;
     @Enumerated
-    @Column(nullable = false)
+    @Column
     private UserType userType = UserType.BORROWER;
     /*@OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "book_id")
