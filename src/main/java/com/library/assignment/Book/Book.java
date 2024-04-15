@@ -1,10 +1,8 @@
 package com.library.assignment.book;
 
 
-<<<<<<< HEAD
-=======
+
 import com.fasterxml.jackson.annotation.JsonFormat;
->>>>>>> 4d3d4be58743e579b96cb220c40267ece1f73e05
 import com.library.assignment.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
