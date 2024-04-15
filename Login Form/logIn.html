@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="login-container">
+    <h2>Login</h2>
+    <form id="login-form">
+        <div class="form-group">
+            <label for="login-username">Username</label>
+            <input type="text" id="login-username" required>
+        </div>
+        <div class="form-group">
+            <label for="login-password">Password</label>
+            <input type="password" id="login-password" required>
+        </div>
+        <button type="submit">Login</button>
+    </form>
+    <p>Don't have an account? <a href="#" id="show-register">Register</a></p>
+</div>
+
+<div class="register-container hidden">
+    <h2>Register</h2>
+    <form id="register-form">
+        <div class="form-group">
+            <label for="register-username">Username</label>
+            <input type="text" id="register-username" required>
+        </div>
+        <div class="form-group">
+            <label for="register-password">Password</label>
+            <input type="password" id="register-password" required>
+        </div>
+        <button type="submit">Register</button>
+    </form>
+    <p>Already have an account? <a href="#" id="show-login">Login</a></p>
+</div>
+
+<div class="actions hidden">
+    <button id="borrow-book">Borrow Book</button>
+    <button id="return-book">Return Book</button>
+    <button id="logout">Logout</button> 
+</div>
+
+<div class="book-list hidden">
+    <h2>Available Books</h2>
+    <input type="text" id="search-input" placeholder="Search...">
+    <ul id="book-list">
+       
+    </ul>
+</div>
+
+<div class="borrowed-books hidden">
+    <h2>Borrowed Books</h2>
+    <ul>
+       
+    </ul>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
