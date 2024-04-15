@@ -33,8 +33,8 @@ public class BookController {
         private ResponseEntity<Boolean> borrowBook(@PathVariable Long bookId, @PathVariable Long userId){
             return bookService.borrowBook(bookId, userId);
         }
-    @PostMapping("/{bookId}/return/{userId}")
-    private ResponseEntity<Boolean> returnBook(@PathVariable Long bookId, @PathVariable Long userId){
-        return bookService.returnBook(bookId, userId);
-    }
+        @PostMapping("/{bookId}/return/{userId}")
+        private ResponseEntity<Boolean> returnBook(@PathVariable Long bookId, @PathVariable Long userId){
+            return bookService.returnBook(bookId, userId);
+        }
 }
