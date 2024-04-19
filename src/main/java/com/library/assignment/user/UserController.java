@@ -45,6 +45,10 @@ public class UserController {
     private ResponseEntity<List<Book>> getBooksByUser(@PathVariable Long userId){
         return userService.getBooksByUser(userId);
     }
+    @PostMapping("/login")
+    private ResponseEntity<UserDto> login(@RequestBody List<String> credentials){
+        return userService.login(credentials);
+    }
     /*@PostMapping("/login")
     private ResponseEntity<Void> */
 
