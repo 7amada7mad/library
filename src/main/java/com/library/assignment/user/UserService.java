@@ -104,4 +104,22 @@ public class UserService {
             return ResponseEntity.notFound().build();
         }
     }
+
+    public ResponseEntity<UserDto> login(List<String> credentials) {
+        String email = credentials.get(0);
+        String pinCode = credentials.get(1);
+        System.out.println(credentials);
+
+
+        Optional<User> optionalUser = Optional.ofNullable(userRepo.findByEmail(email));
+        if (optionalUser.isPresent() && optionalUser.get().getPinCode().equals(pinCode)){
+            User userToLogIn = optionalUser.get();
+            UserDto userToSendBack = new UserDto(userToLogIn.getFirstName(), userToLogIn.getEmail(), userToLogIn.getUserId());
+            System.out.println(userToSendBack.getId());
+            return ResponseEntity.ok(userToSendBack);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+
+    }
 }
