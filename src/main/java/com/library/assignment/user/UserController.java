@@ -46,7 +46,7 @@ public class UserController {
         return userService.getBooksByUser(userId);
     }
     @PostMapping("/login")
-    private ResponseEntity<UserDto> login(@RequestBody List<String> credentials){
+    private ResponseEntity<UserDto> login(@RequestBody Map<String, String> credentials){
         return userService.login(credentials);
     }
     /*@PostMapping("/login")

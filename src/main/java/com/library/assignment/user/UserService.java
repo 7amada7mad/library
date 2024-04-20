@@ -105,16 +105,17 @@ public class UserService {
         }
     }
 
-    public ResponseEntity<UserDto> login(List<String> credentials) {
-        String email = credentials.get(0);
-        String pinCode = credentials.get(1);
+    public ResponseEntity<UserDto> login(Map<String, String> credentials) {
+        String email = credentials.get("email");
+        String pinCode = credentials.get("pinCode");
         System.out.println(credentials);
 
 
-        Optional<User> optionalUser = Optional.ofNullable(userRepo.findByEmail(email));
+        Optional<User> optionalUser = userRepo.findByEmail(email);
+        System.out.println("OptinalUser: "+ optionalUser);
         if (optionalUser.isPresent() && optionalUser.get().getPinCode().equals(pinCode)){
             User userToLogIn = optionalUser.get();
-            UserDto userToSendBack = new UserDto(userToLogIn.getFirstName(), userToLogIn.getEmail(), userToLogIn.getUserId());
+            UserDto userToSendBack = new UserDto(userToLogIn.getFirstName(), userToLogIn.getEmail(), userToLogIn.getUserId(), userToLogIn.getUserType());
             System.out.println(userToSendBack.getId());
             return ResponseEntity.ok(userToSendBack);
         } else {
