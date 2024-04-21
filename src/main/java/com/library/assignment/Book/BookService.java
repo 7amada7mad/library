@@ -75,5 +75,14 @@ public class BookService {
             return ResponseEntity.noContent().build();
         }
     }
+
+    public ResponseEntity<Void> deleteBook(Long bookId) {
+        Optional<Book> bookOptional = bookRepo.findById(bookId);
+        if (bookOptional.isPresent()) {
+            bookRepo.deleteById(bookId);
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.noContent().build();
+    }
 }
 
