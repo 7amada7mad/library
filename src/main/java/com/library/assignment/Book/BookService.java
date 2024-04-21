@@ -77,13 +77,14 @@ public class BookService {
     }
 
     public ResponseEntity<Void> deleteBook(Long bookId) {
-        Optional<Book> optionalBook = bookRepo.findById(bookId);
-        if (optionalBook.isPresent()){
+
+        Optional<Book> bookOptional = bookRepo.findById(bookId);
+        if (bookOptional.isPresent()) {
             bookRepo.deleteById(bookId);
-            return ResponseEntity.noContent().build();
-        }else {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.ok().build();
         }
+        return ResponseEntity.noContent().build();
+
     }
 }
 
