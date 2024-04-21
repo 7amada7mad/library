@@ -37,4 +37,8 @@ public class BookController {
         private ResponseEntity<Boolean> returnBook(@PathVariable Long bookId, @PathVariable Long userId){
             return bookService.returnBook(bookId, userId);
         }
+        @DeleteMapping("{bookId}")
+        private ResponseEntity<Void> deleteBook(@PathVariable Long bookId){
+            return bookService.deleteBook(bookId);
+        }
 }

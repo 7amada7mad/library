@@ -24,23 +24,17 @@ public class Book {
     @GeneratedValue(
             strategy = GenerationType.IDENTITY)
     private Long bookId;
-
     @Column(nullable = false)
     private String title;
     @Column(nullable = false)
     private String author;
-
     @Column(nullable = false)
     @JsonFormat(pattern = "YYYY")
     private Date releaseDate;
-
     @Column
     private boolean borrowed = false;
-
     @Column
     private LocalDate borrowedDate;
-
-
     @Column
     private Long borrowerId;
 
